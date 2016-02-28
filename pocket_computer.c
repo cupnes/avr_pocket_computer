@@ -4,19 +4,14 @@
 
 int main(void)
 {
-	char recog_row, str[2] = { 0 };
-	unsigned char i = 0;
+	char str[2] = { 0 };
 
 	lcd_init();
 	keymatrix_init();
 
 	while (1) {
-		if ((recog_row = check_key(i)) >= 0) {
-			str[0] = key_map[i][(unsigned char)recog_row];
-			lcd_puts(str);
-		}
-		if (++i >= KEY_COLS)
-			i = 0;
+		str[0] = get_char();
+		lcd_puts(str);
 	}
 
 	return 0;

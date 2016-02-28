@@ -4,9 +4,7 @@
 #define KEY_COLS	3
 #define KEY_ROWS	4
 
-extern const char key_map[KEY_COLS][KEY_ROWS];
-
 void keymatrix_init(void);
-char check_key(unsigned char c);
+char get_char(void);
 
 #endif /* _KEYMATRIX_H_ */

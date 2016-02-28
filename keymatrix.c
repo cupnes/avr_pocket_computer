@@ -4,18 +4,13 @@
 
 #define KEY_RECOG_THLD	20
 
-const char key_map[KEY_COLS][KEY_ROWS] = {
+static const char key_map[KEY_COLS][KEY_ROWS] = {
 	{'3', '6', '9', '#'},
 	{'2', '5', '8', '0'},
 	{'1', '4', '7', '*'}
 };
 
-void keymatrix_init(void)
-{
-	DDRB = 0x07;
-}
-
-char check_key(unsigned char c)
+static char check_key(unsigned char c)
 {
 	static unsigned char key_counter[KEY_COLS] = { 0 };
 	char i, recog_row = -1;
@@ -37,4 +32,26 @@ char check_key(unsigned char c)
 		recog_row = -1;
 
 	return recog_row;
+}
+
+void keymatrix_init(void)
+{
+	DDRB = 0x07;
+}
+
+char get_char(void)
+{
+	char recog_row, result;
+	unsigned char i = 0;
+
+	while (1) {
+		if ((recog_row = check_key(i)) >= 0) {
+			result = key_map[i][(unsigned char)recog_row];
+			break;
+		}
+		if (++i >= KEY_COLS)
+			i = 0;
+	}
+
+	return result;
 }
