@@ -42,7 +42,7 @@ static void line_feed(void)
 		lcd_write4(0xc0);
 		current_line = 1;
 	} else {
-		lcd_write4(0x80);
+		lcd_write4(0x01);
 		current_line = 0;
 	}
 }
