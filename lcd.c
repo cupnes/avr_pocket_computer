@@ -14,6 +14,8 @@
 	else LCD_PORT &= ~_BV(2);	\
 }
 
+unsigned char current_row;
+
 static void lcd_write8(unsigned char ch)
 {
 	LCD_PORT = (LCD_PORT & 0x0f) | (ch & 0xf0);
@@ -72,16 +74,24 @@ void lcd_init(void)
 	waitms(2);
 }
 
+void put_char(char c)
+{
+	LCD_RS(1);
+	lcd_write4(c);
+	if (++current_row >= 16) {
+		line_feed();
+		current_row = 0;
+	}
+}
+
 void put_str(char *s)
 {
-	static unsigned char row = 0;
-
 	LCD_RS(1);
 	while (*s) {
 		lcd_write4(*s++);
-		if (++row >= 16) {
+		if (++current_row >= 16) {
 			line_feed();
-			row = 0;
+			current_row = 0;
 		}
 	}
 }

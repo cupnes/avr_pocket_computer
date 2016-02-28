@@ -4,15 +4,11 @@
 
 int main(void)
 {
-	char str[2] = { 0 };
-
 	lcd_init();
 	keymatrix_init();
 
-	while (1) {
-		str[0] = get_char();
-		put_str(str);
-	}
+	while (1)
+		put_char(get_char());
 
 	return 0;
 }
