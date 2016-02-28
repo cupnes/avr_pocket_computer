@@ -3,6 +3,7 @@
 #include "lcd.h"
 
 #define	LCD_PORT	PORTD
+#define MAX_ROW		40
 
 #define	LCD_E(b) {			\
 	if(b) LCD_PORT |= _BV(3);	\
@@ -76,22 +77,23 @@ void lcd_init(void)
 
 void put_char(char c)
 {
-	LCD_RS(1);
-	lcd_write4(c);
-	if (++current_row >= 16) {
+	switch (c) {
+	case '\n':
 		line_feed();
 		current_row = 0;
+		break;
+	default:
+		if (current_row < MAX_ROW - 1) {
+			LCD_RS(1);
+			lcd_write4(c);
+			current_row++;
+		}
+		break;
 	}
 }
 
 void put_str(char *s)
 {
-	LCD_RS(1);
-	while (*s) {
-		lcd_write4(*s++);
-		if (++current_row >= 16) {
-			line_feed();
-			current_row = 0;
-		}
-	}
+	while (*s)
+		put_char(*s++);
 }

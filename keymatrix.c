@@ -5,7 +5,7 @@
 #define KEY_RECOG_THLD	20
 
 static const char key_map[KEY_COLS][KEY_ROWS] = {
-	{'3', '6', '9', '#'},
+	{'3', '6', '9', '\n'},
 	{'2', '5', '8', '0'},
 	{'1', '4', '7', '*'}
 };
