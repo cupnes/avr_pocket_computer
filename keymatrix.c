@@ -10,6 +10,11 @@ const char key_map[KEY_COLS][KEY_ROWS] = {
 	{'1', '4', '7', '*'}
 };
 
+void keymatrix_init(void)
+{
+	DDRB = 0x07;
+}
+
 char check_key(unsigned char c)
 {
 	static unsigned char key_counter[KEY_COLS] = { 0 };

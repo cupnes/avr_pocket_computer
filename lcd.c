@@ -46,6 +46,9 @@ static void line_feed(void)
 
 void lcd_init(void)
 {
+	PORTD = 0;
+	DDRD = 0xfc;
+
 	LCD_RS(0);
 	LCD_E(0);
 	waitms(100);
