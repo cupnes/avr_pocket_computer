@@ -1,6 +1,6 @@
 CFLAGS	=	-mmcu=atmega168
 CFLAGS	+=	-Wall -Wextra
-SRCS	=	common.c lcd.c pocket_computer.c
+SRCS	=	common.c lcd.c keymatrix.c pocket_computer.c
 
 pocket_computer.hex: pocket_computer.elf
 	avr-objcopy -O ihex $< $@
