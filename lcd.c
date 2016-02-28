@@ -72,7 +72,7 @@ void lcd_init(void)
 	waitms(2);
 }
 
-void lcd_puts(char *s)
+void put_str(char *s)
 {
 	static unsigned char row = 0;
 

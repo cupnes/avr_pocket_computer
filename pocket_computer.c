@@ -11,7 +11,7 @@ int main(void)
 
 	while (1) {
 		str[0] = get_char();
-		lcd_puts(str);
+		put_str(str);
 	}
 
 	return 0;

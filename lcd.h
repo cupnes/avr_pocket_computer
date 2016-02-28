@@ -2,6 +2,6 @@
 #define _LCD_H_
 
 void lcd_init(void);
-void lcd_puts(char *s);
+void put_str(char *s);
 
 #endif /* _LCD_H_ */
