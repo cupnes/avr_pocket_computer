@@ -1,16 +1,17 @@
 CFLAGS	=	-mmcu=atmega168
 CFLAGS	+=	-Wall -Wextra
+SRCS	=	common.c pocket_computer.c
 
-.c.o:
-	avr-gcc $(CFLAGS) -o $@ $<
-
-pocket_computer.hex: pocket_computer.o
+pocket_computer.hex: pocket_computer.elf
 	avr-objcopy -O ihex $< $@
+
+pocket_computer.elf: $(SRCS)
+	avr-gcc $(CFLAGS) -o $@ $+
 
 program: pocket_computer.hex
 	sudo avrdude -p m168 -c avrisp2 -U $<
 
 clean:
-	rm -f *~ *.o *.hex
+	rm -f *~ *.o *.elf *.hex
 
 .PHONY: program clean

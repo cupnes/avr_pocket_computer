@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include "common.h"
 
 #define	LCD_PORT	PORTD
 #define KEY_COLS	3
@@ -20,20 +21,6 @@ static const char key_map[KEY_COLS][KEY_ROWS] = {
 	{'2', '5', '8', '0'},
 	{'1', '4', '7', '*'}
 };
-
-static void waitus(unsigned int _n)
-{
-	/* volatile unsigned int n = _n * 10; */
-	volatile unsigned int n = _n * 20;
-	while (n-- > 0);
-}
-
-static void waitms(unsigned int _n)
-{
-	/* volatile unsigned int n = _n * 1500; */
-	volatile unsigned int n = _n * 20000;
-	while (n-- > 0);
-}
 
 static void lcd_write8(unsigned char ch)
 {
@@ -102,14 +89,6 @@ static void lcd_puts(char *s)
 			row = 0;
 		}
 	}
-}
-
-static void sleep(void)
-{
-	volatile unsigned short i, j;
-
-	for (i = 0; i < 1000; i++)
-		for (j = 0; j < 65; j++);
 }
 
 static char check_key(unsigned char c)
